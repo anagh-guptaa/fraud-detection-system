@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
 from backend.database.models import Transaction
 
 def build_transaction_features(db,transaction_data):
@@ -27,17 +26,13 @@ def build_transaction_features(db,transaction_data):
 
     is_new_device=int(current_device not in previous_devices)
 
-    ten_minutes_ago=current_time-timedelta(minutes=10)
-
+    current_time_naive=current_time.replace(tzinfo=None)
+    ten_minutes_ago=(current_time_naive - timedelta(minutes=10))
     recent_transactions=[
         tx for tx in user_transactions
-        if tx.timestamp.replace(
-            tzinfo=ZoneInfo("Asia/Kolkata")
-        )>=ten_minutes_ago
+        if tx.timestamp >= ten_minutes_ago
     ]
-
     transactions_last_10min=len(recent_transactions)
-
     features = {"amount": current_amount,"avg_amount": round(avg_amount, 2),"max_amount": round(max_amount, 2),"amount_ratio": round(amount_ratio, 2),"is_new_location": is_new_location,"is_new_device": is_new_device,"transactions_last_10min": transactions_last_10min}
 
     return features
