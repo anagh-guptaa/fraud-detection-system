@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, String, DateTime
+from sqlalchemy import Column, Integer, Float, String, DateTime, Boolean
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from backend.database.db import Base
@@ -13,6 +13,7 @@ class Transaction(Base):
     location= Column(String, nullable=False)
     device_id= Column(String,nullable= False)
     timestamp= Column(DateTime, default=lambda: datetime.now(ZoneInfo("Asia/Kolkata")))
+    is_fraud = Column(Boolean, default=False)
 
 class Prediction(Base):
     __tablename__ = "predictions"

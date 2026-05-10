@@ -13,13 +13,27 @@ tech_merchants=["Apple","Samsung","Croma","RelianceDigital"]
 daily_merchants=["BigBasket","Blinkit","JioMart","DMart"]
 fraud_merchants=["CryptoX","DarkPay","QuickCash","UnknownMerchant","FastLoan247"]
 
-users=[
-    {"user_id": 1,"avg_spend": 100,"home_location": "Delhi","usual_device": "android_001","preferred_categories":[ecommerce_merchants,food_merchants,daily_merchants]},
-    {"user_id": 2,"avg_spend": 500,"home_location": "Mumbai","usual_device": "iphone_002","preferred_categories": [food_merchants,transport_merchants,entertainment_merchants]},
-    {"user_id": 3,"avg_spend": 1000,"home_location": "Bangalore","usual_device": "laptop_003","preferred_categories": [tech_merchants,ecommerce_merchants,entertainment_merchants]},
-    {"user_id": 4,"avg_spend": 250,"home_location": "Kolkata","usual_device": "android_004","preferred_categories": [daily_merchants,food_merchants,transport_merchants]},
-    {"user_id": 5,"avg_spend": 2000,"home_location": "Hyderabad","usual_device": "iphone_005","preferred_categories": [tech_merchants,ecommerce_merchants,entertainment_merchants]}
-]
+locations = ["Delhi","Mumbai","Bangalore","Kolkata","Hyderabad","Chennai","Pune","Ahmedabad"]
+device_types = ["android","iphone","laptop","tablet"]
+merchant_categories = [ecommerce_merchants,food_merchants,transport_merchants,entertainment_merchants,tech_merchants,daily_merchants]
+
+def generate_users(num_users=100):
+    users=[]
+    for user_id in range(1, num_users + 1):
+        avg_spend=random.randint(100, 5000)
+        home_location=random.choice(locations)
+        device=(f"{random.choice(device_types)}_"f"{random.randint(100,999)}")
+        preferred_categories = random.sample(
+            merchant_categories,
+            k=3
+        )
+        user = {"user_id": user_id,"avg_spend": avg_spend,"home_location": home_location,"usual_device": device,"preferred_categories": preferred_categories}
+        users.append(user)
+
+    return users
+
+users = generate_users(100)
+
 
 def generate_normal_transaction(user):
     merchant_category=random.choice(user["preferred_categories"])
@@ -39,7 +53,7 @@ def generate_fraud_transaction(user):
 
 def generate_transaction():
     user=random.choice(users)
-    fraud_probability=0.10
+    fraud_probability=0.05
     if random.random()<fraud_probability:
         transaction=generate_fraud_transaction(user)
     else:
@@ -58,5 +72,5 @@ if __name__=="__main__":
             f"Amount: ₹{transaction['amount']} | "
             f"Fraud: {transaction['is_fraud']}"
         )
-        time.sleep(2)
+        time.sleep(0.01)
 

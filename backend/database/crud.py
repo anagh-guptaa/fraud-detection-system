@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from backend.database.models import Transaction
 
 def create_transaction(db: Session, transaction_data: dict):
-    transaction=Transaction(user_id=transaction_data["user_id"],amount=transaction_data["amount"],merchant=transaction_data["merchant"],location=transaction_data["location"],device_id=transaction_data["device_id"],timestamp=transaction_data["timestamp"])
+    transaction=Transaction(user_id=transaction_data["user_id"],amount=transaction_data["amount"],merchant=transaction_data["merchant"],location=transaction_data["location"],device_id=transaction_data["device_id"],timestamp=transaction_data["timestamp"],is_fraud=transaction_data["is_fraud"])
     db.add(transaction)
     db.commit()
     db.refresh(transaction)
