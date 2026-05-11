@@ -8,8 +8,7 @@ def build_transaction_features(db,transaction_data):
     current_device=transaction_data["device_id"]
     current_time=transaction_data["timestamp"]
 
-    user_transactions=(db.query(Transaction).filter(Transaction.user_id==user_id).all())
-
+    user_transactions=(db.query(Transaction).filter(Transaction.user_id==user_id,Transaction.transaction_id<transaction_data["transaction_id"]).all())
     if not user_transactions:
         return {"amount":current_amount,"avg_amount":current_amount,"max_amount":current_amount,"amount_ratio": 1,"is_new_location": 0, "is_new_device": 0, "transaction_last_10min": 1}
 

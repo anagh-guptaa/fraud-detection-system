@@ -11,7 +11,7 @@ print(f"\nTotal Transactions Loaded: {len(transactions)}")
 dataset=[]
 
 for tx in transactions:
-    transaction_data={"user_id": tx.user_id,"amount": tx.amount,"merchant": tx.merchant,"location": tx.location,"device_id": tx.device_id,"timestamp": tx.timestamp}
+    transaction_data={"transaction_id": tx.transaction_id,"user_id": tx.user_id,"amount": tx.amount,"merchant": tx.merchant,"location": tx.location,"device_id": tx.device_id,"timestamp": tx.timestamp}
     features=build_transaction_features(db,transaction_data)
     features["is_fraud"]=tx.is_fraud
     dataset.append(features)
