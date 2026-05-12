@@ -8,8 +8,7 @@ model_path=(BASE_DIR/"training"/"fraud_detection_model.pkl")
 model=joblib.load(model_path)
 print("\nFraud Detection Model Loaded\n")
 
-FEATURE_COLUMNS=["amount","avg_amount","max_amount","amount_ratio","is_new_location","is_new_device","transactions_last_10min"]
-
+FEATURE_COLUMNS = ["amount","avg_amount","max_amount","amount_ratio","is_new_location","is_new_device","transactions_last_10min","is_high_risk_merchant","is_high_risk_location"]
 def predict_transaction(db,transaction_data):
     features=build_transaction_features(db,transaction_data)
     feature_vector=np.array([features[col] for col in FEATURE_COLUMNS]).reshape(1,-1)

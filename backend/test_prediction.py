@@ -5,7 +5,7 @@ from backend.predict import predict_transaction
 
 db=SessionLocal()
 
-transaction_data={"transaction_id":999999,"user_id": 1000, "amount": 120000, "merchant": "Amazon", "location": "Mumbai", "device_id": "android_3","timestamp": datetime.now(ZoneInfo("Asia/Kolkata"))}
+transaction_data={"transaction_id":999999,"user_id": 10099, "amount": 120, "merchant": "Amazon", "location": "Mumbai", "device_id": "android_3","timestamp": datetime.now(ZoneInfo("Asia/Kolkata"))}
 
 result= predict_transaction(db,transaction_data)
 

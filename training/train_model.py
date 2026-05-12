@@ -9,7 +9,7 @@ dataset_path=(BASE_DIR/"data"/"processed"/"processed_fraud_dataset.csv")
 df=pd.read_csv(dataset_path)
 print(df.head())
 
-feature_columns=["amount","avg_amount","max_amount","amount_ratio","is_new_location","is_new_device","transactions_last_10min"]
+feature_columns=["amount","avg_amount","max_amount","amount_ratio","is_new_location","is_new_device","transactions_last_10min","is_high_risk_merchant","is_high_risk_location"]
 X=df[feature_columns]
 y_true=df["is_fraud"]
 
