@@ -9,7 +9,38 @@ dataset_path=(BASE_DIR/"data"/"processed"/"processed_fraud_dataset.csv")
 df=pd.read_csv(dataset_path)
 print(df.head())
 
-feature_columns=["amount","avg_amount","max_amount","amount_ratio","is_new_location","is_new_device","transactions_last_10min","is_high_risk_merchant","is_high_risk_location"]
+feature_columns = [
+    "amount",
+    "avg_amount",
+    "max_amount",
+    "amount_ratio",
+    "amount_std",
+    "amount_zscore",
+    "is_new_location",
+    "is_new_device",
+    "impossible_travel",
+    "transactions_last_10min",
+    "transactions_last_1hr",
+    "transactions_last_24hr",
+    "transactions_last_7d",
+    "amount_last_1hr",
+    "amount_last_24hr",
+    "unique_merchants_last_24hr",
+    "num_unique_devices_30d",
+    "device_first_seen_days",
+    "is_unknown_device_type",
+    "is_high_risk_merchant",
+    "merchant_fraud_rate",
+    "amount_vs_merchant_avg",
+    "merchant_category_risk",
+    "is_high_risk_location",
+    "hour_of_day",
+    "is_night",
+    "is_weekend",
+    "day_of_week",
+    "time_since_last_txn_hours",
+    "is_round_amount",
+]
 X=df[feature_columns]
 y_true=df["is_fraud"]
 
